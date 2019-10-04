@@ -1,0 +1,49 @@
+<head>
+  <title>meteor-x3dom-test</title>
+</head>
+
+<body>
+  {{> x3dom}}
+</body>
+
+<template name="x3dom">
+  <x3d>
+    <scene>
+      <navigationinfo type="EXAMINE"></navigationinfo>
+      <viewpoint position="2 13 20" orientation="-2 0 0 0.55"></viewpoint>
+      <directionalLight
+        id="directional"
+        direction="-1 -1 -1"
+        on="TRUE"
+        intensity="0"
+        shadowIntensity="0.5"
+        shadowCascades="1"
+        shadowFilterSize="8"
+        shadowMapSize="1024"
+      >
+      </directionalLight>
+      <transform rotation="-1.5707 0 0 1.5707">
+        <shape>
+          <appearance>
+            <material diffuseColor="#32CD32"> </material>
+          </appearance>
+          <plane size="50 50"></plane>
+        </shape>
+      </transform>
+      {{#each box in boxes}}
+      <transform translation="{{ box.x }} {{ box.y }} {{ box.z }}">
+        <shape id="{{ box._id }}">
+          <appearance>
+            <material
+              diffuseColor="{{ box.color }}"
+              ambientIntensity="0.1"
+            ></material>
+          </appearance>
+          <box size="1 1 1"></box>
+        </shape>
+      </transform>
+      {{/each}}
+    </scene>
+  </x3d>
+  <h2>box count: {{ counter }}</h2>
+</template>
